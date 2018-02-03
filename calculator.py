@@ -3,6 +3,25 @@ import sys
 #pay=salary-3500-insurance
 #tax=pay*rate-deduct
 
+class Config():
+    def __init__(self,configfile):  #get and store the configure file
+        self._config={}  # define a dict 
+
+    def get_config(self):  # get configure news from Configure target
+
+
+class UserData():     #get and store the staff data 
+    def __init__(self,userdatafile):
+        self._userdata={}  # get the user's ID and laborage
+    def dumptofile(self,outputfile):
+        self
+    def calculator(self):
+       
+    def dumptofile(self,outputfile):
+        
+
+
+
 try:
     for arg in sys.argv[1:]:
         total= arg.split(':')
