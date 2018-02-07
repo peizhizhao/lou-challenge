@@ -1,67 +1,107 @@
-#! home/shiyanlou/calculator.py python3 
-import sys 
-import csv      
-#pay=salary-3500-insurance
-#tax=pay*rate-deduct
+# step : 1.anlay parameter 2read config 3 read data 4 calculator 5 output 
 
-class Args(object):
-    def __init__(self):
-        self.args=sys.argv[1:]
-    def read_function():
-        with open(     ) as f1 :
-            for f1 in 
+import sys
+ 
+class ArgError(Exception):
+    pass 
 
+class Args:
+## chu li minglinghang canshu
+    def __init__(self,args):
+         
+         self.args=args
+    
+    def __parse_arg(self,arg):
+         try:
+            #get value of parameters by index 
+             value=self.args[self.args.index(arg)+1]
+             except (ValueError,IndexError):
+                 value=None
+  	     return value
+    def get_arg(self,arg):
+          value=self.__parse_arg(arg)
+	  if value is None:
+	      raise ArgError('not found ars s%',%arg)
+	  return value 
 
+class SheBaoConfig:
+##shebao config file class
+    def __init__(self,file):
+        self.jishu_low,self.jishu_high,self.total_rate=self.__parse_cofig(file)
+    def __parse_config(self,file):
+        ##jie xi shebao canshu config file
+        rate=0
+        jishu_low=0
+        jishu_high=0
 
-class Config():
-    def __init__(self,configfile):  #get and store the configure file
-        self._config={ }  # define a dict 
+        with open(file) as f:
+	    for line in f:
+ 	        key,value=line.split('=')
+  		key=key.strip()
+		try:
+		    value=float(value.strip())
+		except ValueError:
+		    continue
+		if key=='JiShuL':
+		    jishu_low=value
+		elif key=='JiShuH':
+		    jishu_high=value
+		else:
+		    rate+=value
+	return jishu_low,jishu_high,rate
 
-    def get_config(self):  # get configure news from Configure target
+class EmployeeData:
+##employee data achieve class
+    def __init__(self,file):
+	
+	self.data=self.__parse_file(file)
+    def __parse_file(self,file):
+	data=[]
+	for line in open(file):
+            employee_id,gongzi=line.split(',')
+            data.append((int(employee_id),int(gongzi)))
+	return data
 
-
-class UserData(object):     #get and store the staff data 
-    def __init__(self,userdatafile):
-        self._userdata={}  # get the user's ID and laborage
-    def dumptofile(self,outputfile):
-        self
-    def calculator(self):
-       
-    def dumptofile(self,outputfile):
+    def __iter__(self):
         
 
-class IncomeTaxCalculator(object):
-    def calc_for_all_userdata(self):
-	try:
-	    for arg in sys.argv[1:]:
-		total= arg.split(':')
-		number=total[0]    
-		salary=int(total[1])
-		insurance=salary*(0.08+0.02+0.005+0.06)
-		if salary>3500:
-		    pay=salary-3500-insurance
-		    if 0<pay<=1500:
-			tax=pay*0.03-0
-		    elif 1500<pay<=4500:
-			tax=pay*0.1-105
-		    elif 4500<pay<=9000:
-			tax=pay*0.2-555
-		    elif 9000<pay<=35000:
-			tax=pay*0.25-1005
-		    elif 35000<pay<=55000:
-			tax=pay*0.3-2775
-		    elif 55000<pay<=80000:
-			tax=pay*0.35-5505
-		    else: 
-			tax=pay*0.45-1350
-		    tax_salary=salary-tax-insurance
-		else: tax_salary=salary-insurance
-		     
-		print('{}:{:.2f}'.format(number,tax_salary))
-	except IndexError:
-	    print('Parameter Error')
-	except ValueError:
-	    print('Parameter Error')
 
-if __name__=='__main__':
-    """     """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
